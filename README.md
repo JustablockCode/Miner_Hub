@@ -8,7 +8,7 @@ Your antivirus may detect it as a virus! Please don't report us because our app 
 
 ## Requirements:
 1. Windows 7,10,11
-2. Python 3.9 - 3.13preview(Optional)
+2. Python 3.9 - 3.12.4(Optional)
 3. Pip(Optional)
 4. 2+ GB of RAM
 5. Admin privileges
