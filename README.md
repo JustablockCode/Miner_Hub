@@ -7,10 +7,11 @@ The exe file is just a converted Python file.
 Your antivirus may detect it as a virus! Please don't report us because our app is NOT a virus. Thank you.
 
 ## In development:
-1. More miners
-2. More coins
+1. ~~More miners~~
+2. ~~More coins~~
 3. Rewrite whole code
 4. Website
+5. ~~Error handling~~
 ## Requirements:
 1. Windows 7,10,11
 2. Python 3.9 - 3.12.4(Optional)
