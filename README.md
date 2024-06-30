@@ -2,7 +2,7 @@
 
 ## Versions:
 ##### Latest release: V1.0
-##### Latest pre-release: V2.0-BETA
+##### Latest pre-release: V2.0-BETA1
 ##### Development: V2.0-BETA2
 
 ## About:
