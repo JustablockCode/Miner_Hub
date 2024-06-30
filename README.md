@@ -3,7 +3,7 @@
 ## Versions:
 ##### Latest release: V1.0
 ##### Latest pre-release: V2.0-BETA1
-##### Development: V2.0-BETA2
+##### Development: V2.0-RELEASE
 
 ## About:
 I made a Python script that downloads miners and configures it automatically for myself, but I decided to make it public!
