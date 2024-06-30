@@ -1,5 +1,4 @@
-# MINER HUB: BETA 2.0
-
+# MINER HUB: 2.0 BETARELEASE-2
 
 import os
 import requests
@@ -42,7 +41,7 @@ if miner_choice == "1":
     miner_name = "XMRig"
     miner_url = 'https://github.com/xmrig/xmrig/releases/download/v6.21.3/xmrig-6.21.3-msvc-win64.zip'
     miner_executable = 'xmrig-6.21.3/xmrig.exe'
-    config_path = 'xmrig-6.21.3/config.json'
+    config_path = os.path.join(miner_name.lower(), 'xmrig-6.21.3/config.json')
     config = {
         "autosave": True,
         "background": False,
@@ -85,8 +84,8 @@ if miner_choice == "1":
 elif miner_choice == "2":
     miner_name = "lolMiner"
     miner_url = 'https://github.com/Lolliedieb/lolMiner-releases/releases/download/1.88/lolMiner_v1.88_Win64.zip'
-    miner_executable = '1.88/lolMiner.exe'
-    config_path = '1.88/config.cfg'
+    miner_executable = os.path.join('1.88', 'lolMiner.exe')
+    config_path = os.path.join(miner_name.lower(), '1.88/config.cfg')
     config = f"""
 # lolMiner 1.0 configuration
 # uncomment a line (remove the starting "#") to set an option in this file
@@ -113,7 +112,6 @@ else:
     print("Invalid choice. Exiting.")
     exit(1)
 
-zip_file_path = f'{miner_name}.zip'
 extract_path = miner_name.lower()
 miner_executable_path = os.path.join(extract_path, miner_executable)
 
@@ -146,26 +144,37 @@ def modify_config_file(config, path):
 def launch_miner(executable_path, config_path=None):
     print(f"Launching {miner_name} from {executable_path}")
     
-    if miner_choice == "1":
-        process = subprocess.Popen([executable_path, '--config', config_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    elif miner_choice == "2":
-        process = subprocess.Popen([executable_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    
-    while True:
-        output = process.stdout.readline()
-        if output == '' and process.poll() is not None:
-            break
-        if output:
-            print(output.strip())
-    
-    rc = process.poll()
-    print(f"{miner_name} exited with code {rc}")
+    try:
+        if miner_choice == "1":
+            process = subprocess.Popen([executable_path, '--config', config_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        elif miner_choice == "2":
+            process = subprocess.Popen([executable_path, f"--algo", "ETCHASH", "--pool", pool_address, "--user", f"{wallet_address}{pcname_suffix}"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        
+        while True:
+            output = process.stdout.readline()
+            if output == '' and process.poll() is not None:
+                break
+            if output:
+                print(output.strip())
+        
+        rc = process.poll()
+        print(f"{miner_name} exited with code {rc}")
+
+    except Exception as e:
+        print(f"Failed to launch {miner_name}: {e}")
 
 if __name__ == "__main__":
-    if not os.path.exists(zip_file_path) or not os.path.exists(extract_path):
-        download_miner(miner_url, zip_file_path)
-        time.sleep(3)
-        extract_zip(zip_file_path, extract_path)
+    if not os.path.exists(miner_executable_path):
+        if miner_name == "XMRig":
+            zip_file_path = f'{miner_name}.zip'
+            download_miner(miner_url, zip_file_path)
+            time.sleep(3)
+            extract_zip(zip_file_path, extract_path)
+        elif miner_name == "lolMiner":
+            zip_file_path = f'{miner_name}.zip'
+            download_miner(miner_url, zip_file_path)
+            time.sleep(3)
+            extract_zip(zip_file_path, extract_path)
     else:
         print(f"{miner_name} is already downloaded and extracted.")
 
