@@ -1,4 +1,10 @@
 # Miner Hub
+
+## Versions:
+##### Latest release: V1.0
+##### Latest pre-release: V2.0-BETA
+##### Development: V2.0-BETA2
+
 ## About:
 I made a Python script that downloads miners and configures it automatically for myself, but I decided to make it public!
 The exe file is just a converted Python file.
@@ -7,11 +13,7 @@ The exe file is just a converted Python file.
 Your antivirus may detect it as a virus! Please don't report us because our app is NOT a virus. Thank you.
 
 ## In development:
-1. ~~More miners~~
-2. ~~More coins~~
-3. Rewrite whole code
-4. Website
-5. ~~Error handling~~
+1. Website
 ## Requirements:
 1. Windows 7,10,11
 2. Python 3.9 - 3.12.4(Optional)
